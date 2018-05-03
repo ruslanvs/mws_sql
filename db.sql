@@ -44,3 +44,8 @@ VALUES
     ( 'Ilvermorny' );
 
 SELECT * FROM schools;
+
+-- ******** UPDATING A RECORD ********
+UPDATE schools
+SET title = 'CastelobruxoNEW'
+WHERE id = '3b786102-7c89-4998-beaf-7f758c4a7b92';
