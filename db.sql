@@ -17,6 +17,7 @@ $some_name$ LANGUAGE plpgsql;
 CREATE TABLE schools(
     title VARCHAR ( 100 ) NOT NULL,
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
+    is_deleted BOOLEAN DEFAULT false,
     created_at TIMESTAMPTZ(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ(0) NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
@@ -27,6 +28,7 @@ CREATE TABLE students(
     name VARCHAR ( 100 ) NOT NULL,
     score DECIMAL,
     school_id UUID REFERENCES schools,
+    is_deleted BOOLEAN DEFAULT false,
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
     created_at TIMESTAMPTZ(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMPTZ(0) NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -54,3 +56,15 @@ UPDATE schools
 SET title = 'IlvermornyNEW'
 WHERE id = '0aae96e2-d1bf-4365-9568-789b11b5cdfe';
 
+UPDATE schools
+SET is_deleted = true
+WHERE id = 'f4089392-8763-45e8-9538-c237aee00612';
+
+INSERT INTO schools( title, id )
+VALUES
+    ( 'Mahoutokoro School of Magic', '3d25c232-9bbd-44f1-86e9-807140b70ed9' ),
+    ( 'Uagadou School of Magic', '29be25fa-79de-4728-8c6b-257857f1a2a2' );
+
+UPDATE schools
+SET is_deleted = false
+WHERE id = 'f4089392-8763-45e8-9538-c237aee00612';
