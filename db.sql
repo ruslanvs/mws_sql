@@ -26,7 +26,7 @@ FOR EACH ROW EXECUTE PROCEDURE updated_at();
 
 CREATE TABLE students(
     name VARCHAR ( 100 ) NOT NULL,
-    score DECIMAL,
+    score INTEGER,
     school_id UUID REFERENCES schools NOT NULL,
     is_deleted BOOLEAN DEFAULT false,
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4() NOT NULL,
@@ -83,6 +83,27 @@ VALUES
 SELECT * FROM students;
 
 -- ******** UPDATES ********
+UPDATE students
+SET name = 'DonnaNEW'
+WHERE id = '86fd91d2-2515-4e18-9fb6-a21268585a6d';
+
+UPDATE students
+SET is_deleted = true
+WHERE id = 'aa43601c-8ce2-42de-9e8a-e488df64d682';
+
+UPDATE students
+SET is_deleted = false
+WHERE id = 'aa43601c-8ce2-42de-9e8a-e488df64d682';
+
+INSERT INTO students( name, score, id, school_id )
+VALUES
+    ( 'Mohammed', 98, '8b02ae5d-0ae9-4032-b354-0a19710cb49e', '29a7c46c-4b83-48d4-8cb7-aa5409687ab0' ),
+    ( 'Sultan', 89, 'f079af94-dba6-4715-8abf-49396935a797', '29a7c46c-4b83-48d4-8cb7-aa5409687ab0' );
+
+-- ******** DELETES ********
+DELETE FROM students;
+DELETE FROM schools;
+
 
 
 
@@ -90,8 +111,8 @@ SELECT * FROM students;
 86fd91d2-2515-4e18-9fb6-a21268585a6d used
 9bc1b8cd-e304-40c5-98c1-9e20a8573e0f used
 56295fa0-0669-4dfb-a183-d57f69961996 used
-8b02ae5d-0ae9-4032-b354-0a19710cb49e
-f079af94-dba6-4715-8abf-49396935a797
+8b02ae5d-0ae9-4032-b354-0a19710cb49e used
+f079af94-dba6-4715-8abf-49396935a797 used
 e59bd7de-cc5c-402a-9e18-6806329361df
 691973f2-72d8-446e-befb-781e9b27d0fe
 1daba1a1-f543-4707-a86c-ffb9fc08be86
